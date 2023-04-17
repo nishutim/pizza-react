@@ -1,0 +1,37 @@
+.search {
+   flex: 1 1 auto;
+   max-width: 400px;
+   min-height: 50px;
+   padding: 10px 10px 10px 15px;
+   border: 1px solid lighten(#7B7B7B, 10%);
+   border-radius: 10px;
+   display: flex;
+   align-items: center;
+   gap: 10px;
+   transition: border-color 0.3s ease;
+
+   &Focused {
+      border-color: #FE5F1E;
+   }
+
+   &Icon {
+      flex: 0 0 auto;
+      font-size: 18px;
+      color: #7B7B7B;
+   }
+
+   input {
+      width: 100%;
+      outline: none;
+      border: none;
+      background-color: transparent;
+      font-family: inherit;
+      font-size: 16px;
+      line-height: 1;
+      color: #7B7B7B;
+   }
+
+   @media screen and (max-width: 767.98px) {
+      display: none;
+   }
+}

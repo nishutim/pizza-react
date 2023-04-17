@@ -1,0 +1,45 @@
+.logo {
+   display: flex;
+   align-items: center;
+   gap: 15px;
+   color: inherit;
+   text-decoration: none;
+
+   @media screen and (max-width: 767.98px) {
+      flex: 1 1 auto;
+   }
+
+   &:hover {
+      span {
+         color: #FE5F1E;
+      }
+   }
+
+   div {
+      display: flex;
+      flex-direction: column;
+
+      b {
+         font-weight: 800;
+         font-size: 24px;
+         line-height: calc(29 / 24);
+         letter-spacing: 0.01em;
+         text-transform: uppercase;
+
+         @media screen and (max-width: 399.98px) {
+            display: none;
+         }
+      }
+
+      span {
+         font-size: 16px;
+         line-height: calc(19 / 16);
+         color: #7B7B7B;
+         transition: color 0.3s ease;
+
+         @media screen and (max-width: 575.98px) {
+            display: none;
+         }
+      }
+   }
+}

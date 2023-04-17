@@ -1,0 +1,18 @@
+.page {
+   flex: 1 1 auto;
+   display: flex;
+   flex-direction: column;
+   padding-top: 70px;
+
+   @media screen and (min-width: 767.98px) {
+      padding-top: 90px;
+   }
+
+   @media screen and (min-width: 991.98px) {
+      padding-top: 100px;
+   }
+
+   @media screen and (min-width: 1429.98px) {
+      padding-top: 0;
+   }
+}

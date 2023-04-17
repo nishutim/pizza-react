@@ -1,0 +1,29 @@
+.input {
+   display: flex;
+   flex-direction: column;
+   gap: 10px;
+
+   .label {
+      font-weight: 600;
+      font-size: 20px;
+
+      &Error {
+         color: red;
+      }
+   }
+
+   input {
+      width: 100%;
+      padding: 10px 5px;
+      border: none;
+      border-bottom: 4px solid darken(#F3F3F3, 20%);
+      font-size: 18px;
+      color: #7B7B7B;
+      transition: border-color 0.3s ease;
+
+      &:focus {
+         outline: none;
+         border-color: #FE5F1E;
+      }
+   }
+}

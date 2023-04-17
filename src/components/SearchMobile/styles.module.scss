@@ -1,0 +1,64 @@
+.search {
+   @media screen and (min-width: 767.98px) {
+      display: none;
+   }
+
+   &Active {
+      .searchPopup {
+         top: 80px;
+         opacity: 1;
+         visibility: visible;
+      }
+   }
+
+   &Btn {
+      padding: 5px;
+      display: flex;
+      align-items: center;
+      border: none;
+      background-color: transparent;
+      font-size: 28px;
+      color: #7B7B7B;
+      transition: color 0.3s ease;
+
+      &:hover {
+         cursor: pointer;
+         color: #FE5F1E;
+      }
+   }
+
+   &Popup {
+      position: absolute;
+      z-index: 5;
+      top: -100%;
+      left: 0;
+      width: 100%;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+
+      div {
+         min-height: 48px;
+         padding: 10px 10px 10px 15px;
+         display: flex;
+         align-items: center;
+         gap: 10px;
+         background-color: #F9F9F9;
+         box-shadow: 0px 0px 8px 1px rgba(34, 60, 80, 0.2);
+         font-size: 16px;
+         color: #7B7B7B;
+         transition: border-color 0.3s ease;
+
+         input {
+            width: 100%;
+            outline: none;
+            border: none;
+            background-color: transparent;
+            font-family: inherit;
+            font-size: 16px;
+            line-height: 1;
+            color: #FE5F1E;
+         }
+      }
+   }
+}

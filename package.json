@@ -1,0 +1,65 @@
+{
+  "name": "react-pizza",
+  "version": "0.1.0",
+  "private": true,
+  "homepage": "https://nishutim.github.io/react-pizza",
+  "dependencies": {
+    "@emailjs/browser": "^3.10.0",
+    "@tanstack/react-query": "^4.28.0",
+    "@tanstack/react-query-devtools": "^4.28.0",
+    "@testing-library/jest-dom": "^5.14.1",
+    "@testing-library/react": "^13.0.0",
+    "@testing-library/user-event": "^13.2.1",
+    "@types/jest": "^27.0.1",
+    "@types/lodash.debounce": "^4.0.7",
+    "@types/node": "^16.7.13",
+    "@types/react": "^18.0.0",
+    "@types/react-content-loader": "^4.0.0",
+    "@types/react-dom": "^18.0.0",
+    "axios": "^1.3.4",
+    "formik": "^2.2.9",
+    "framer-motion": "^10.3.1",
+    "lodash.debounce": "^4.0.8",
+    "node-sass": "^8.0.0",
+    "qs": "^6.11.1",
+    "react": "^18.2.0",
+    "react-content-loader": "^6.2.0",
+    "react-dom": "^18.2.0",
+    "react-icons": "^4.8.0",
+    "react-router-dom": "^6.8.2",
+    "react-scripts": "5.0.1",
+    "react-toastify": "^9.1.1",
+    "typescript": "^4.4.2",
+    "web-vitals": "^2.1.0",
+    "yup": "^1.0.2"
+  },
+  "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "gh-pages": "^5.0.0"
+  }
+}

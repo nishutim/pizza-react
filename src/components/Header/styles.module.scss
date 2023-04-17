@@ -1,0 +1,74 @@
+.header {
+   @media screen and (max-width: 575.98px) {
+      min-height: 5px;
+   }
+
+   @media screen and (max-width: 1429.98px) {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      min-height: 40px;
+   }
+
+   &.scrolled {
+      .wrapper {
+         @media screen and (max-width: 1429.98px) {
+            background-color: rgba(255, 255, 255, 0.95);
+         }
+      }
+
+      .body {
+         min-height: 70px;
+
+         @media screen and (min-width: 767.98px) {
+            min-height: 90px;
+         }
+
+         @media screen and (min-width: 991.98px) {
+            min-height: 100px;
+         }
+
+         @media screen and (min-width: 1429.98px) {
+            min-height: 148px;
+         }
+      }
+   }
+
+   .wrapper {
+      border-bottom: 1px solid #F7F7F7;
+      background-color: #fff;
+      transition: background-color 0.3s ease;
+
+      @media screen and (max-width: 1429.98px) {
+         position: fixed;
+         z-index: 50;
+         top: 0;
+         left: 0;
+         width: 100%;
+      }
+   }
+
+   .body {
+      position: relative;
+      min-height: 80px;
+      padding: 10px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      transition: min-height 0.3s ease;
+
+      @media screen and (min-width: 767.98px) {
+         min-height: 100px;
+      }
+
+      @media screen and (min-width: 991.98px) {
+         min-height: 115px;
+      }
+
+      @media screen and (min-width: 1429.98px) {
+         min-height: 148px;
+      }
+   }
+}

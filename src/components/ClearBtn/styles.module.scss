@@ -1,0 +1,15 @@
+.clearBtn {
+   padding: 5px;
+   display: flex;
+   align-items: center;
+   border: none;
+   background-color: transparent;
+   font-size: 18px;
+   color: #7B7B7B;
+   transition: color 0.3s ease;
+
+   &:hover {
+      cursor: pointer;
+      color: coral;
+   }
+}
