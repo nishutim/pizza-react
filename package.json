@@ -2,7 +2,7 @@
   "name": "react-pizza",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://nishutim.github.io/react-pizza",
+  "homepage": "https://nishutim.github.io/pizza-react",
   "dependencies": {
     "@emailjs/browser": "^3.10.0",
     "@tanstack/react-query": "^4.28.0",
