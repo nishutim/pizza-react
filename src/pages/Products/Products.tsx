@@ -92,7 +92,6 @@ const Products: FC = () => {
                   customStyle={s.pagination}
                   selectedPage={+selectedPage}
                   totalCount={selectedCategory.value === CategoryValues.ALL && !searchValue ? 10 : products.length}
-                  deps={[searchValue, selectedCategory, selectedSort]}
                   onPageChange={handlePageChange} />
             )}
          </Container>

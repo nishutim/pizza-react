@@ -9,7 +9,7 @@ const getPageDefaultParams = (pageName?: string) => {
       default: {
          return {
             page: '1',
-            limit: '8',
+            limit: '10',
             sortBy: SortTypes.PRICE,
             order: SortValues.DESC
          } as IProductsQueryParams

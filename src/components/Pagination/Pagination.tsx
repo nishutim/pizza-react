@@ -9,13 +9,12 @@ interface Props {
    customStyle?: string;
    selectedPage: number;
    limit?: number;
-   deps: unknown[];
    portionSize?: number;
    totalCount?: number;
    onPageChange: (page: number) => void;
 };
 
-const Pagination: FC<Props> = ({ customStyle = '', selectedPage, limit = 8, deps, portionSize = 5, totalCount = 10, onPageChange }) => {
+const Pagination: FC<Props> = ({ customStyle = '', selectedPage, limit = 10, portionSize = 5, totalCount = 10, onPageChange }) => {
    const [currentPortion, setCurrentPortion] = useState(Math.ceil(selectedPage / portionSize));
 
    const pagesCount = Math.ceil(totalCount / limit);
@@ -37,14 +36,6 @@ const Pagination: FC<Props> = ({ customStyle = '', selectedPage, limit = 8, deps
    const handlePageClick = (pageNum: number) => {
       if (pageNum !== Number(selectedPage)) onPageChange(pageNum);
    };
-
-   // selects 1st page if one of dependencies has changed (example: search value, category, sort type)
-   useEffect(() => {
-      if (selectedPage !== 1) {
-         onPageChange(1);
-      }
-   }, [...deps]);
-
 
    return (
       <div className={`${s.root} ${customStyle}`}>
