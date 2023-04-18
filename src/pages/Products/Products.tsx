@@ -3,12 +3,25 @@ import { useLocation, useNavigate } from 'react-router-dom';
 
 import s from './styles.module.scss';
 
-import { useAddToCart, useAppDispatch, useAppSelector, useFetchCartItems, useFetchProducts, useUpdateItemInCart } from '../../hooks';
 import { ICartItem, ICategory, ISortType } from '../../interfaces';
-import { filter_selectCategory, filter_selectFilter, filter_selectPage, filter_selectSearch, filter_selectSortType } from '../../redux/slices/filter/selectors';
 import { CategoryValues } from '../../utils/types';
-import { setCategory, setFilter, setPage, setSortType } from '../../redux/slices/filter';
 import { mapFilterToQuery, mapQueryToFilter, normalizeQuery } from '../../utils';
+import {
+   useAddToCart,
+   useAppDispatch,
+   useAppSelector,
+   useFetchCartItems,
+   useFetchProducts,
+   useUpdateItemInCart
+} from '../../hooks';
+import {
+   filter_selectCategory,
+   filter_selectFilter,
+   filter_selectPage,
+   filter_selectSearch,
+   filter_selectSortType
+} from '../../redux/slices/filter/selectors';
+import { setCategory, setFilter, setPage, setSortType } from '../../redux/slices/filter';
 
 import {
    Categories,
