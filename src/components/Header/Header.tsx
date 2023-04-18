@@ -1,36 +1,28 @@
 import { FC, useMemo } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
 import debounce from 'lodash.debounce';
 
 import s from './styles.module.scss';
 
-import { getCartQty, getCartTotal, normalizeCategory, normalizeSearch, normalizeSort } from '../../utils';
-import { useIntersect } from '../../hooks';
-import { ICartItem, ICategory, ISortType } from '../../interfaces';
+import { getCartQty, getCartTotal } from '../../utils';
+import { useAppDispatch, useAppSelector, useFetchCartItems, useIntersect } from '../../hooks';
+import { filter_selectSearch } from '../../redux/slices/filter/selectors';
+import { setSearch } from '../../redux/slices/filter';
 
 import { CartBtn, Container, HeaderLogo, Search, SearchMobile } from '..';
 
-interface Props {
-   cartItems: ICartItem[];
-}
-
-const Header: FC<Props> = ({ cartItems }) => {
+const Header: FC = () => {
+   const searchValue = useAppSelector(filter_selectSearch);
+   const { data: cartItems = [] } = useFetchCartItems();
    const totalPrice = useMemo(() => getCartTotal(cartItems), [cartItems]);
    const cartQty = useMemo(() => getCartQty(cartItems), [cartItems]);
 
    const [visible, wrapperRef] = useIntersect(true);
 
-   const { search } = useLocation();
-   const navigate = useNavigate();
-
-   const searchValue = normalizeSearch(search);
-   const selectedCategory = normalizeCategory(search) as ICategory;
-   const selectedSort = normalizeSort(search) as ISortType;
+   const dispatch = useAppDispatch();
 
    const handleSearchChange = useMemo(() => debounce((value: string) => {
-      const query = normalizeSearch(search, value);
-      navigate(query);
-   }, 500), [selectedCategory, selectedSort]);
+      dispatch(setSearch(value));
+   }, 500), []);
 
    return (
       <header

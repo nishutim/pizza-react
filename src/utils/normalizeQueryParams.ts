@@ -2,6 +2,7 @@ import qs from 'qs';
 import { ICategory, IProductsQueryParams, ISortType } from '../interfaces';
 import { CategoryValues, SortTypes, SortValues } from './types';
 import { categories, sortTypes } from './consts';
+import { FilterState } from '../redux/slices/filter';
 
 
 const getPageDefaultParams = (pageName?: string) => {
@@ -9,7 +10,7 @@ const getPageDefaultParams = (pageName?: string) => {
       default: {
          return {
             page: '1',
-            limit: '10',
+            limit: '8',
             sortBy: SortTypes.PRICE,
             order: SortValues.DESC
          } as IProductsQueryParams
@@ -21,6 +22,28 @@ export const normalizeQuery = (query: string, pageName?: string) => {
    const defaultParams = getPageDefaultParams(pageName);
    const params = qs.parse(query.slice(1));
    return qs.stringify({ ...defaultParams, ...params }, { addQueryPrefix: true });
+}
+
+export const mapQueryToFilter = (query: string) => {
+   const params = qs.parse(query.slice(1)) as unknown as IProductsQueryParams;
+   const filter = {} as FilterState;
+   filter.page = +params.page || 1;
+   filter.limit = +params.limit || 10;
+   filter.sortType = sortTypes.find(item => item.type === params.sortBy && item.value === params.order) || sortTypes[0];
+   filter.category = categories.find(item => item.value === params.category) || categories[0];
+   filter.search = params.search || '';
+   return filter;
+}
+
+export const mapFilterToQuery = (filter: FilterState) => {
+   const params = {} as IProductsQueryParams;
+   params.page = String(filter.page);
+   params.limit = String(filter.limit);
+   params.sortBy = filter.sortType.type;
+   params.order = filter.sortType.value;
+   filter.category.value !== CategoryValues.ALL && (params.category = filter.category.value);
+   filter.search !== '' && (params.search = filter.search);
+   return qs.stringify(params, { addQueryPrefix: true });
 }
 
 export const normalizeCategory = (query: string, category?: ICategory) => {

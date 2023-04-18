@@ -8,12 +8,12 @@ import { useFetchCartItems } from '../../hooks';
 import { Header, Router } from '..';
 
 const App: FC = () => {
-  const { data: cartItems = [] } = useFetchCartItems();
+  useFetchCartItems();
 
   return (
     <div className={s.wrapper}>
       <div className={s.body}>
-        <Header cartItems={cartItems} />
+        <Header />
         <Router />
         <ToastContainer
           position="bottom-right"
