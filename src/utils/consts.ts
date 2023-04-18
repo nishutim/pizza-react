@@ -46,7 +46,7 @@ export const sortTypes: ISortType[] = [
    },
    {
       name: SortNames.BY_RATING_ASC,
-      type: SortTypes.PRICE,
+      type: SortTypes.RATING,
       value: SortValues.ASC
    },
    {

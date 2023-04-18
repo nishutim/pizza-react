@@ -6,3 +6,4 @@ export { default as useIntersect } from './useIntersect';
 export { default as usePopup } from './usePopup';
 export { default as useRemoveItemFromCart } from './useRemoveItemFromCart';
 export { default as useUpdateItemInCart } from './useUpdateItemInCart';
+export { useAppDispatch, useAppSelector } from './redux';

@@ -1,18 +1,27 @@
-import { FC, useCallback, useEffect } from 'react';
+import { FC, useCallback, useEffect, useMemo, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import s from './styles.module.scss';
 
-import { useAddToCart, useFetchCartItems, useFetchProducts, useUpdateItemInCart } from '../../hooks';
 import { ICartItem, ICategory, ISortType } from '../../interfaces';
 import { CategoryValues } from '../../utils/types';
+import { mapFilterToQuery, mapQueryToFilter, normalizeQuery } from '../../utils';
 import {
-   normalizeCategory,
-   normalizePage,
-   normalizeQuery,
-   normalizeSearch,
-   normalizeSort
-} from '../../utils';
+   useAddToCart,
+   useAppDispatch,
+   useAppSelector,
+   useFetchCartItems,
+   useFetchProducts,
+   useUpdateItemInCart
+} from '../../hooks';
+import {
+   filter_selectCategory,
+   filter_selectFilter,
+   filter_selectPage,
+   filter_selectSearch,
+   filter_selectSortType
+} from '../../redux/slices/filter/selectors';
+import { setCategory, setFilter, setPage, setSortType } from '../../redux/slices/filter';
 
 import {
    Categories,
@@ -25,8 +34,6 @@ import {
 
 const Products: FC = () => {
    const { search } = useLocation();
-   const navigate = useNavigate();
-
    const query = normalizeQuery(search);
 
    const { data: products = [], isLoading } = useFetchProducts(query);
@@ -34,25 +41,32 @@ const Products: FC = () => {
    const { mutateAsync: addToCart } = useAddToCart();
    const { mutateAsync: updateItemInCart } = useUpdateItemInCart();
 
-   const searchValue = normalizeSearch(search);
-   const selectedCategory = normalizeCategory(search) as ICategory;
-   const selectedSort = normalizeSort(search) as ISortType;
-   const selectedPage = normalizePage(search);
+   const filter = useAppSelector(filter_selectFilter);
+   const selectedPage = useAppSelector(filter_selectPage);
+   const selectedSort = useAppSelector(filter_selectSortType);
+   const selectedCategory = useAppSelector(filter_selectCategory);
+   const searchValue = useAppSelector(filter_selectSearch);
 
-   const handleCategoryChange = (category: ICategory) => {
-      const query = normalizeCategory(search, category) as string;
-      navigate(query);
-   };
+   const shouldPaginationReset = useMemo(() => (
+      [searchValue, selectedCategory, selectedSort]
+   ), [searchValue, selectedCategory, selectedSort]);
 
-   const handleSortChange = (sort: ISortType) => {
-      const query = normalizeSort(search, sort) as string;
-      navigate(query);
-   };
+   const shouldUpdateQuery = useRef(false);
 
-   const handlePageChange = (page: number) => {
-      const query = normalizePage(search, page);
-      navigate(query);
-   };
+   const dispatch = useAppDispatch();
+   const navigate = useNavigate();
+
+   const handleCategoryChange = useCallback((category: ICategory) => {
+      dispatch(setCategory(category));
+   }, []);
+
+   const handleSortChange = useCallback((sort: ISortType) => {
+      dispatch(setSortType(sort));
+   }, []);
+
+   const handlePageChange = useCallback((page: number) => {
+      dispatch(setPage(page));
+   }, []);
 
    const handleAddToCart = useCallback(async (newCartItem: ICartItem) => {
       const itemInCart = cartItems.find(item => (
@@ -66,7 +80,20 @@ const Products: FC = () => {
       }
    }, [cartItems]);
 
-   useEffect(() => navigate(query), []);
+   useEffect(() => {
+      navigate(query);
+      const currentFilter = mapQueryToFilter(search);
+      dispatch(setFilter(currentFilter));
+   }, []);
+
+   useEffect(() => {
+      if (shouldUpdateQuery.current) {
+         const query = mapFilterToQuery(filter);
+         navigate(query);
+      } else {
+         shouldUpdateQuery.current = true;
+      }
+   }, [filter]);
 
    return (
       <Page>
@@ -90,9 +117,10 @@ const Products: FC = () => {
             {products.length > 0 && (
                <Pagination
                   customStyle={s.pagination}
-                  selectedPage={+selectedPage}
+                  selectedPage={selectedPage}
                   totalCount={selectedCategory.value === CategoryValues.ALL && !searchValue ? 10 : products.length}
-                  onPageChange={handlePageChange} />
+                  onPageChange={handlePageChange}
+                  deps={shouldPaginationReset} />
             )}
          </Container>
       </Page>
